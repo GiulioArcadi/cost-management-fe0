@@ -1,0 +1,99 @@
+<div class="container">
+    <div class="col-md-6 offset-md-3 mt-4">
+<div class="parent">
+    <h2 class="text-center">Modifica Commessa</h2>
+    <br>
+
+    <div style="width: 400px;">
+
+
+        <form (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <label for="codice">Codice Commessa</label>
+                <input type="text" [readonly]="true" class="form-control" id="codice" required [(ngModel)]="commessa.codice" name="codice"
+                 #codice="ngModel" [class.is-invalid]="codice.invalid && codice.touched">
+                <div *ngIf="codice.errors && (codice.invalid && codice.touched)" style='float:right;'>
+                    <small class="text-danger" *ngIf="codice.errors.required">Campo Obbligatorio</small>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="name">Descrizione Commessa</label>
+                <input type="text" class="form-control" id="descrizioneCommessa" required [(ngModel)]="commessa.descrizioneCommessa"
+                    pattern=".{1,50}" #descrizioneCommessa="ngModel" [class.is-invalid]="descrizioneCommessa.invalid && descrizioneCommessa.touched"
+                    name="descrizioneCommessa">
+                <div *ngIf="descrizioneCommessa.errors && (descrizioneCommessa.invalid && descrizioneCommessa.touched)" style='float:right;'>
+                    <small class="text-danger" *ngIf="descrizioneCommessa.errors.required">Campo Obbligatorio</small>
+                    <small class="text-danger" *ngIf="descrizioneCommessa.errors.pattern">inserire solo caratteri alphanumerici (max 50)</small>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="name">Importo</label>
+                <input type="text" class="form-control" id="importo" [(ngModel)]="commessa.importo"
+                    pattern="\d*\.{0,1}\d*" #importo="ngModel" [class.is-invalid]="importo.invalid"
+                    name="importo">
+                <div *ngIf="importo.errors && importo.invalid" style='float:right;'>
+                    <small class="text-danger" *ngIf="importo.errors.pattern">inserire solo caratteri numerici (usare il punto per la virgla)</small>
+                </div>
+            </div>
+            <br>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Cliente</mat-label>
+                    <mat-select
+                      name="defaultId"
+                        (selectionChange)="changeSelectedCliente($event.value)" placeholder="Cliente">
+                        <mat-option *ngFor="let cliente of clienti | async" [value]="cliente.partitaIva">
+                            {{cliente.ragioneSociale}} ({{cliente.partitaIva}})
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field>
+                <mat-select [(value)]="selected" placeholder="Tipologia Commessa">
+                  <mat-option value="Time Material">Time Material</mat-option>
+                  <mat-option value="Produzione">Product</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <br>
+              <div class="form-group" class="form-horizontal">
+                <label for="name">Data Inizio Commessa</label>
+                <input type="date" class="form-control" id="dataInizioCommessa" required [(ngModel)]="commessa.dataInizioCommessa"
+                    name="dataInizioCommessa" placeholder="gg/mm/aaaa" pattern=".*"
+                     #dataInizioCommessa="ngModel"
+                    [class.is-invalid]="dataInizioCommessa.invalid && dataInizioCommessa.touched">
+                <div *ngIf="dataInizioCommessa.errors && (dataInizioCommessa.invalid && dataInizioCommessa.touched)" style='float:right;'>
+                    <small class="text-danger" *ngIf="dataInizioCommessa.errors.required">Campo Obbligatorio</small>
+                    <small class="text-danger" *ngIf="dataInizioCommessa.errors.pattern">il formato data deve essere gg/mm/aaaa
+                     </small>
+                     <small class="text-danger" *ngIf="dataInizioCommessa.errors.futureDate">La data di nascita non puo' essere nel futuro
+                    </small>
+                </div>
+            </div>
+            <br>
+            <div class="form-group" class="form-horizontal">
+                <label for="name">Data Fine Commessa</label>
+                <input type="date" class="form-control" id="dataFineCommessa" required [(ngModel)]="commessa.dataFineCommessa"
+                    name="dataFineCommessa" placeholder="gg/mm/aaaa" pattern=".*"
+                     #dataFineCommessa="ngModel"
+                    [class.is-invalid]="dataFineCommessa.invalid && dataFineCommessa.touched">
+                <div *ngIf="dataFineCommessa.errors && (dataFineCommessa.invalid && dataFineCommessa.touched)" style='float:right;'>
+                    <small class="text-danger" *ngIf="dataFineCommessa.errors.required">Campo Obbligatorio</small>
+                    <small class="text-danger" *ngIf="dataFineCommessa.errors.pattern">il formato data deve essere gg/mm/aaaa
+                     </small>
+                     <small class="text-danger" *ngIf="dataFineCommessa.errors.futureDate">La data di nascita non puo' essere nel futuro
+                    </small>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success">Invia</button>
+        </form>
+
+    </div>
+    </div>
+</div>
+</div>

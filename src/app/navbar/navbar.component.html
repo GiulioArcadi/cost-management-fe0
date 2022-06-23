@@ -1,0 +1,47 @@
+<style>
+a.is_disabled {
+   pointer-events: none;
+   cursor: default;
+}
+
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="auth.isAuthenticated">
+    <a class="navbar-brand" href="#">Cost Managment</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <!--<li class="nav-item">
+            <a class="nav-link" [routerLink]="['login']"
+              routerLinkActive="active">Login</a>
+          </li>-->
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['registration']"
+            routerLinkActive="active">Registrazione Utente</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['gestioneDipendenti']"
+            routerLinkActive="active">Gestione Dipendente</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['gestioneCommessa']"
+            routerLinkActive="active">Gestione Commessa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['clienti']"
+            routerLinkActive="active">Anagrafica Cliente</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['tipologia_contratto']"
+            routerLinkActive="active">Tipologia Contratto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['datiContrattuali']"
+            routerLinkActive="active">Dati Contrattuali</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+

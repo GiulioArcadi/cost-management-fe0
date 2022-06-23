@@ -1,0 +1,100 @@
+<div class="parent">
+    <h2 class="text-center">Aggiungi Commessa</h2>
+    <br>
+    
+    <div style="width: 400px;">
+    
+    
+        <form class="buttonHolder" (ngSubmit)="onSubmit()">
+       
+            <div class="form-group">
+                <label for="codice">Codice Commessa</label>
+                <input type="text" class="form-control" id="codice" required [(ngModel)]="commessa.codice" name="codice"
+                    pattern="^[a-zA-Z\s]*$" #codice="ngModel" [class.is-invalid]="codice.invalid && codice.touched">
+                <div *ngIf="codice.errors && (codice.invalid && codice.touched)" style='float:right;'>
+                    <small class="text-danger" *ngIf="codice.errors.required">Campo Obbligatorio</small>
+                    <small class="text-danger" *ngIf="codice.errors.pattern">inserire massimo 30 caratteri alfabetici </small>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="descrizioneCommessa">Descrizione Commessa</label>
+                <input type="text" class="form-control" id="descrizioneCommessa" required [(ngModel)]="commessa.descrizioneCommessa"
+                    pattern="^[a-zA-Z\s]*$" #descrizioneCommessa="ngModel" [class.is-invalid]="descrizioneCommessa.invalid && descrizioneCommessa.touched"
+                    name="descrizioneCommessa">
+                <div *ngIf="descrizioneCommessa.errors && (descrizioneCommessa.invalid && descrizioneCommessa.touched)" style='float:right;'>
+                    <small class="text-danger" *ngIf="descrizioneCommessa.errors.required">Campo Obbligatorio</small>
+                    <small class="text-danger" *ngIf="descrizioneCommessa.errors.pattern">inserire massimo 30 caratteri alfabetici</small>
+                </div>
+            </div>
+            <br>
+              <!--   <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Tipologia Commessa </mat-label>
+                    <mat-select  
+                    [(ngModel)]="defaultAziendaId" name="defaultAziendaId"
+                        (selectionChange)="changeClient($event.value)" placeholder="Azienda">
+                        <mat-option *ngFor="let azienda of aziende | async  " [value]="azienda.id">
+                            {{azienda.nome}} 
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            -->
+            <div>
+            <mat-form-field>
+                <mat-select [(value)]="selectedCommessa" placeholder="Tipologia Commessa">
+                  <mat-option value="Time Material">Time Material</mat-option>
+                  <mat-option value="Produzione">Product</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <br>
+              <div class="form-group" class="form-horizontal">
+                <label for="dataInizioCommessa">Data Inizio Commessa</label>
+                <input type="date" class="form-control" id="dataInizioCommessa" required [(ngModel)]="commessa.dataInizioCommessa"
+                    name="dataInizioCommessa" placeholder="gg/mm/aaaa" 
+                     #dataInizioCommessa="ngModel"
+                    [class.is-invalid]="dataInizioCommessa.invalid && dataInizioCommessa.touched"> 
+                <div *ngIf="dataInizioCommessa.errors && (dataInizioCommessa.invalid && dataInizioCommessa.touched)" style='float:right;'>
+                    <small class="text-danger" *ngIf="dataInizioCommessa.errors.required">Campo Obbligatorio</small>
+                    <small class="text-danger" *ngIf="dataInizioCommessa.errors.pattern">il formato data deve essere gg/mm/aaaa
+                     </small>
+                     <small class="text-danger" *ngIf="dataInizioCommessa.errors.futureDate">La data di nascita non puo' essere nel futuro
+                    </small>
+                </div>
+            </div>
+            <br>
+            <div class="form-group" class="form-horizontal">
+                <label for="dataFineCommessa">Data Fine Commessa</label>
+                <input type="date" class="form-control" id="dataFineCommessa" required [(ngModel)]="commessa.dataFineCommessa"
+                    name="dataFineCommessa" placeholder="gg/mm/aaaa" 
+                     #dataFineCommessa="ngModel"
+                    [class.is-invalid]="dataFineCommessa.invalid && dataFineCommessa.touched"> 
+                <div *ngIf="dataFineCommessa.errors && (dataFineCommessa.invalid && dataFineCommessa.touched)" style='float:right;'>
+                    <small class="text-danger" *ngIf="dataFineCommessa.errors.required">Campo Obbligatorio</small>
+                    <small class="text-danger" *ngIf="dataFineCommessa.errors.pattern">il formato data deve essere gg/mm/aaaa
+                     </small>
+                     <small class="text-danger" *ngIf="dataFineCommessa.errors.futureDate">La data di nascita non puo' essere nel futuro
+                    </small>
+                </div>
+            </div>
+
+            <br>
+            <div>
+                <mat-form-field >
+                    <mat-label>Cliente</mat-label>
+                    <mat-select (selectionChange)="changeClient($event.value)" placeholder="Cliente">
+                        <mat-option *ngFor="let cliente of clienti | async  " [value]="cliente.partitaIva">
+                            {{cliente.ragioneSociale}} ({{cliente.partitaIva}})
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success">Invia</button>
+        </form>
+    
+    </div>
+    </div>
+    

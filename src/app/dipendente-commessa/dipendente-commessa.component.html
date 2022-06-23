@@ -1,0 +1,132 @@
+<div class="parent">
+    <h2 class="text-center">Aggiungi Commessa-Risorsa</h2>
+    <br>
+
+    <div style="width: 400px;">
+
+
+        <form (ngSubmit)="onSubmit()">
+            <div>
+                <div class="form-field-group">
+                <mat-form-field appearance="outline">
+                    <mat-label>Codice Commessa</mat-label>                   
+                    <mat-select (selectionChange)="changeCodiceCommessa($event.value)"
+                    panelClass="my-select-panel-class"
+                        placeholder="Codice Commessa">  
+                        <mat-option *ngFor="let commessa of commesse | async  " [value]="commessa">
+                            {{commessa.codice}} 
+<!--{{commessa.importo | number:'1.2-2' }} EUR
+<span>{{commessa.importo >= 0 ? (commessa.importo | number:'1.2-2'): ''}} EUR</span>-->
+                        </mat-option>                   
+                    </mat-select>                
+                </mat-form-field>
+            </div>
+            </div>
+            <div *ngIf="tipologiaCommessa == 'Produzione'" class="form-group" class="form-horizontal">
+                 - <span style="color:brown">Produzione </span> -- <span> Importo Totale: {{commessa.importo | number:'1.2-2'}} EUR</span>  <hr>
+            </div>
+            <div *ngIf="tipologiaCommessa == 'Time Material'" class="form-group" class="form-horizontal">
+                 -<span style="color:brown"> Time Material</span> -  <hr>
+            </div>
+
+            <br>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label> Associa Risorsa</mat-label>
+                    <mat-select (selectionChange)="changeDipendente($event.value)" placeholder="Associa Risorsa">
+                        <mat-option *ngFor="let dipendente of dipendenti | async  " [value]="dipendente">
+                            {{dipendente.nome}} {{dipendente.cognome}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+
+<!--
+            <div *ngIf="tipologiaCommessa == 'Produzione' && risorsaAssociata == true" class="form-group"
+                class="form-horizontal">
+            
+                <label for="importo"> Importo : </label>
+                <input type="text" class="form-control" id="importo" required
+                [(ngModel)]="commessa.importo" name="importo" [readonly]="true">
+            
+            </div>
+            -->
+            <br>
+
+            <div *ngIf="(tipologiaCommessa == 'Time Material' && risorsaAssociata == true) || (tipologiaCommessa == 'Produzione' && risorsaAssociata == true )" class="form-group"
+                class="form-horizontal">
+
+                <div style="margin-right: 33px">
+                    <hr>
+                    <p> <span class="spaceTariffa">{{nome |uppercase}} {{cognome|uppercase}} </span> | <span
+                            class="spaceTariffa"></span>
+                        <button type="button" class="btn btn-primary pull-right" (click)="aggiungiTariffa();"><i
+                                class="fa fa-plus"></i> Aggiungi Tariffa</button>
+                        <!--<a href="gestioneDipendenti/listaDipendenti">Aggiungi Tariffa</a></p>-->
+                </div>
+            </div>
+            <div *ngIf="aggiungiTriffaComboBox == true" class="form-group" class="form-horizontal">
+                <br>
+                <label for="tariffaGg">Tariffa Giornaliera in EUR</label>
+                <input type="number" class="form-control" id="tariffaGg" required
+                    [(ngModel)]="dipendenteCommessa.tariffaGg" name="tariffaGg" placeholder="0.00"
+                    pattern="\d+(\.\d{1,2})?" #tariffaGg="ngModel"
+                    [class.is-invalid]="tariffaGg.invalid && tariffaGg.touched">
+                <div *ngIf="tariffaGg.errors && (tariffaGg.invalid && tariffaGg.touched)" style='float:right;'>
+                    <small class="text-danger" *ngIf="tariffaGg.errors.required">Campo Obbligatorio</small>
+                    <small class="text-danger" *ngIf="tariffaGg.errors.pattern">inserire caratteri numerici</small>
+                </div>
+
+            </div>
+                <!--*ngIf="tipologiaCommessa == 'Produzione' && risorsaAssociata == true  || aggiungiTriffaComboBox==true"-->
+            <div *ngIf=" aggiungiTriffaComboBox==true"
+                class="form-group">
+                <br>
+                <label for="dataInizioAttivita">Data inizio attivita'</label>
+                <input type="date" class="form-control" id="dataInizioAttivita" required
+                    [(ngModel)]="dipendenteCommessa.dataInizioAttivita" name="dataInizioAttivita"
+                    #dataInizioAttivita="ngModel"
+                    [class.is-invalid]="dataInizioAttivita.invalid && dataInizioAttivita.touched">
+                <div *ngIf="dataInizioAttivita.errors && (dataInizioAttivita.invalid && dataInizioAttivita.touched)"
+                    style='float:right;'>
+                    <small class="text-danger" *ngIf="dataInizioAttivita.errors.required">Campo Obbligatorio</small>
+                    <small class="text-danger" *ngIf="dataInizioAttivita.errors.pattern">il formato data deve essere
+                        gg/mm/aaaa
+                    </small>
+                </div>
+            </div>
+            
+            <!--*ngIf="tipologiaCommessa == 'Produzione' && risorsaAssociata == true || aggiungiTriffaComboBox==true "-->
+            <div *ngIf=" aggiungiTriffaComboBox==true "
+                class="form-group">
+                <br>
+                <label for="dataFineAttivita">Data fine attivita'</label>
+                <input type="date" class="form-control" id="dataFineAttivita" required
+                    [(ngModel)]="dipendenteCommessa.dataFineAttivita" name="dataFineAttivita"
+                    #dataFineAttivita="ngModel"
+                    [class.is-invalid]="dataFineAttivita.invalid && dataFineAttivita.touched">
+                <div *ngIf="dataFineAttivita.errors && (dataFineAttivita.invalid && dataFineAttivita.touched)"
+                    style='float:right;'>
+                    <small class="text-danger" *ngIf="dataFineAttivita.errors.required">Campo Obbligatorio</small>
+                    <small class="text-danger" *ngIf="dataFineAttivita.errors.pattern">il formato data deve essere
+                        gg/mm/aaaa
+                    </small>
+                </div>
+
+                <br>
+            <button type="submit" class="btn btn-success">Inserisci</button>
+            </div>
+            
+
+
+
+
+
+
+     
+            
+        </form>
+
+    </div>
+</div>

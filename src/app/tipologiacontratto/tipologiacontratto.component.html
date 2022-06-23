@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="col-md-6 offset-md-3 mt-4">
+        <h2>Tipologia Contratto</h2>
+        <form #form="ngForm" (ngSubmit)="addContratto()">
+            <small class="text-danger">{{msg}}</small>
+            <div class="form-group mt-2">
+            <label for="tipologia">Tipologia Contratto</label>
+            <input type="tipologia" 
+                class="form-control" 
+                placeholder="inserisci Tipologia Contratto"
+                name="tipologia" 
+                [(ngModel)]="contratto.tipologia"
+                required
+                #tipologia="ngModel"
+                [class.is-invalid]="tipologia.invalid && tipologia.touched">
+            <small class="text-danger"
+                [class.d-none]="tipologia.valid || tipologia.untouched">Tipologia Contratto non può essere vuoto</small>
+            </div>
+            <button [disabled]="form.form.invalid" type="submit" class="btn btn-primary mt-3">Aggiungi</button>
+        </form>
+        <!--<small class="float-right" [routerLink]="['login']">Login</small>-->
+    </div>
+</div>
+

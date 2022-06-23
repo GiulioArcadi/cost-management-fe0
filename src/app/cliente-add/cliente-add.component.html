@@ -1,0 +1,136 @@
+<!--component html goes here -->
+<style>
+    .form-group {
+        margin-bottom: 0.5cm;
+    }
+</style>
+<div class="container">
+    <div class="col-md-6 offset-md-3 mt-4">
+        <h3>Aggiungi Cliente</h3>
+        <div style="width: 400px;">
+            <form (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="name">Ragione Sociale</label>
+                    <input type="text" class="form-control" id="ragioneSociale" required
+                        [(ngModel)]="cliente.ragioneSociale" name="ragioneSociale" pattern=".{1,30}"
+                        #ragioneSociale="ngModel" [class.is-invalid]="ragioneSociale.invalid && ragioneSociale.touched">
+                    <div *ngIf="ragioneSociale.errors && (ragioneSociale.invalid && ragioneSociale.touched)"
+                        style='float:right;'>
+                        <small class="text-danger" *ngIf="ragioneSociale.errors.required">Campo Obbligatorio</small>
+                        <small class="text-danger" *ngIf="ragioneSociale.errors.pattern">inserire massimo 30 caratteri
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Indirizzo</label>
+                    <input type="text" class="form-control" id="indirizzo" required [(ngModel)]="cliente.indirizzo"
+                        name="indirizzo" pattern=".{1,30}" #indirizzo="ngModel"
+                        [class.is-invalid]="indirizzo.invalid && indirizzo.touched">
+                    <div *ngIf="indirizzo.errors && (indirizzo.invalid && indirizzo.touched)" style='float:right;'>
+                        <small class="text-danger" *ngIf="indirizzo.errors.required">Campo Obbligatorio</small>
+                        <small class="text-danger" *ngIf="indirizzo.errors.pattern">inserire massimo 30 caratteri
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Numero civico</label>
+                    <input type="text" class="form-control" id="ncivico" required [(ngModel)]="cliente.ncivico"
+                        name="ncivico" pattern=".{1,30}" #ncivico="ngModel"
+                        [class.is-invalid]="ncivico.invalid && ncivico.touched">
+                    <div *ngIf="ncivico.errors && (ncivico.invalid && ncivico.touched)" style='float:right;'>
+                        <small class="text-danger" *ngIf="ncivico.errors.required">Campo Obbligatorio</small>
+                        <small class="text-danger" *ngIf="ncivico.errors.pattern">inserire massimo 30 caratteri
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Città</label>
+                    <input type="text" class="form-control" id="citta" required [(ngModel)]="cliente.citta" name="citta"
+                        pattern=".{1,30}" #citta="ngModel" [class.is-invalid]="citta.invalid && citta.touched">
+                    <div *ngIf="citta.errors && (citta.invalid && citta.touched)" style='float:right;'>
+                        <small class="text-danger" *ngIf="citta.errors.required">Campo Obbligatorio</small>
+                        <small class="text-danger" *ngIf="citta.errors.pattern">inserire massimo 30 caratteri </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Provincia</label>
+                    <input type="text" class="form-control" id="provincia" required [(ngModel)]="cliente.provincia"
+                        name="provincia" pattern=".{1,30}" #provincia="ngModel"
+                        [class.is-invalid]="provincia.invalid && provincia.touched">
+                    <div *ngIf="provincia.errors && (provincia.invalid && provincia.touched)" style='float:right;'>
+                        <small class="text-danger" *ngIf="provincia.errors.required">Campo Obbligatorio</small>
+                        <small class="text-danger" *ngIf="provincia.errors.pattern">inserire massimo 30 caratteri
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Cap</label>
+                    <input type="text" class="form-control" id="cap" required [(ngModel)]="cliente.cap" name="cap"
+                        pattern=".{1,30}" #cap="ngModel" [class.is-invalid]="cap.invalid && cap.touched">
+                    <div *ngIf="cap.errors && (cap.invalid && cap.touched)" style='float:right;'>
+                        <small class="text-danger" *ngIf="cap.errors.required">Campo Obbligatorio</small>
+                        <small class="text-danger" *ngIf="cap.errors.pattern">inserire massimo 30 caratteri </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Stato</label>
+                    <input type="text" class="form-control" id="stato" required [(ngModel)]="cliente.stato" name="stato"
+                        pattern=".{1,30}" #stato="ngModel" [class.is-invalid]="stato.invalid && stato.touched">
+                    <div *ngIf="stato.errors && (stato.invalid && stato.touched)" style='float:right;'>
+                        <small class="text-danger" *ngIf="stato.errors.required">Campo Obbligatorio</small>
+                        <small class="text-danger" *ngIf="stato.errors.pattern">inserire massimo 30 caratteri </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Partita Iva</label>
+                    <input type="text" class="form-control" id="partitaIva" required [(ngModel)]="cliente.partitaIva"
+                        name="partitaIva" pattern="\d{11}" #partitaIva="ngModel"
+                        [class.is-invalid]="partitaIva.invalid && partitaIva.touched">
+                    <div *ngIf="partitaIva.errors && (partitaIva.invalid && partitaIva.touched)" style='float:right;'>
+                        <small class="text-danger" *ngIf="partitaIva.errors.required">Campo Obbligatorio</small>
+                        <small class="text-danger" *ngIf="partitaIva.errors.pattern">inserire 11 caratteri
+                            numerici</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Codice Fiscale</label>
+                    <input type="text" class="form-control" id="codiceFiscale" required
+                        [(ngModel)]="cliente.codiceFiscale" name="codiceFiscale" pattern="\d{11}"
+                        #codiceFiscale="ngModel" [class.is-invalid]="codiceFiscale.invalid && codiceFiscale.touched">
+                    <div *ngIf="codiceFiscale.errors && (codiceFiscale.invalid && codiceFiscale.touched)"
+                        style='float:right;'>
+                        <small class="text-danger" *ngIf="codiceFiscale.errors.required">Campo Obbligatorio</small>
+                        <small class="text-danger" *ngIf="codiceFiscale.errors.pattern">inserire 11 caratteri
+                            numerici</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Codice Interscambio</label>
+                    <input type="text" class="form-control" id="codiceInterscambio" required
+                        [(ngModel)]="cliente.codiceInterscambio" name="codiceInterscambio" pattern="\S{7}"
+                        #codiceInterscambio="ngModel"
+                        [class.is-invalid]="codiceInterscambio.invalid && codiceInterscambio.touched">
+                    <div *ngIf="codiceInterscambio.errors && (codiceInterscambio.invalid && codiceInterscambio.touched)"
+                        style='float:right;'>
+                        <small class="text-danger" *ngIf="codiceInterscambio.errors.required">Campo Obbligatorio</small>
+                        <small class="text-danger" *ngIf="codiceInterscambio.errors.pattern">inserire 7 caratteri
+                            alphanumerici</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Pec</label>
+                    <input type="text" class="form-control" id="pec" required [(ngModel)]="cliente.pec" name="pec"
+                        pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" #pec="ngModel"
+                        [class.is-invalid]="pec.invalid && pec.touched">
+                    <div *ngIf="pec.errors && (pec.invalid && pec.touched)" style='float:right;'>
+                        <small class="text-danger" *ngIf="pec.errors.required">Campo Obbligatorio</small>
+                        <small class="text-danger" *ngIf="pec.errors.pattern">inserire Email valida</small>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Aggiungi</button>
+            </form>
+        </div>
+    </div>
+</div>

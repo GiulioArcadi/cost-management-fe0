@@ -1,0 +1,135 @@
+<div class="parent">
+<h2 class="text-center">Modifica Dipendente</h2>
+
+<div style="width: 400px;">
+
+    <form (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>Azienda</mat-label>
+                <mat-select [(ngModel)]="oldAziendaId" name="oldAziendaId"
+                    (selectionChange)="changeClient($event.value)">
+                    <mat-option *ngFor="let azienda of aziende |async" [value]="azienda.id">
+                        {{azienda.nome}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <label for="name">Nome</label>
+        <input type="text" class="form-control" id="nome" required [(ngModel)]="dipendente.nome" name="nome"
+            pattern="^[a-zA-Z\s]*$" #nome="ngModel" [class.is-invalid]="nome.invalid && nome.touched">
+        <div *ngIf="nome.errors && (nome.invalid && nome.touched)" style='float:right;'>
+            <small class="text-danger" *ngIf="nome.errors.required">Campo Obbligatorio</small>
+            <small class="text-danger" *ngIf="nome.errors.pattern">inserire massimo 30 caratteri alfabetici </small>
+        </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Cognome</label>
+            <input type="text" class="form-control" id="cognome" required [(ngModel)]="dipendente.cognome"
+                pattern="^[a-zA-Z\s]*$" #cognome="ngModel" [class.is-invalid]="cognome.invalid && cognome.touched"
+                name="cognome">
+            <div *ngIf="cognome.errors && (cognome.invalid && cognome.touched)" style='float:right;'>
+                <small class="text-danger" *ngIf="cognome.errors.required">Campo Obbligatorio</small>
+                <small class="text-danger" *ngIf="cognome.errors.pattern">inserire massimo 30 caratteri
+                    alfabetici</small>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="name">Codice Fiscale</label>
+            <input type="text" [readonly]="true" class="form-control" id="codiceFiscale" required [(ngModel)]="dipendente.codiceFiscale"
+                name="codiceFiscale" pattern="^[a-zA-Z0-9]{16}$" #codiceFiscale="ngModel"
+                [class.is-invalid]="codiceFiscale.invalid && codiceFiscale.touched">
+            <div *ngIf="codiceFiscale.errors && (codiceFiscale.invalid && codiceFiscale.touched)" style='float:right;'>
+                <small class="text-danger" *ngIf="codiceFiscale.errors.required">Campo Obbligatorio</small>
+                <small class="text-danger" *ngIf="codiceFiscale.errors.pattern">inserire 16 caratteri per il codice
+                    fiscale </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Luogo di nascita</label>
+            <input type="text"  class="form-control" id="luogoNascita" required [(ngModel)]="dipendente.luogoNascita"
+                name="luogoNascita" pattern=".{1,30}" #luogoNascita="ngModel"
+                [class.is-invalid]="codiceFiscale.invalid && codiceFiscale.touched">
+            <div *ngIf="luogoNascita.errors && (luogoNascita.invalid && luogoNascita.touched)" style='float:right;'>
+                <small class="text-danger" *ngIf="luogoNascita.errors.required">Campo Obbligatorio</small>
+                <small class="text-danger" *ngIf="luogoNascita.errors.pattern">inserire massimo 30 caratteri </small>
+            </div>
+        </div>
+        <!--pattern="^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/\-]\d{4}$"-->
+        <div class="form-group">
+            <label for="name">Data di nascita</label>
+            <input type="date" [max]="getToday()" class="form-control" id="dataNascita" required [(ngModel)]="dipendente.dataNascita"
+                name="dataNascita" placeholder="gg/mm/aaaa"
+                 #dataNascita="ngModel"
+                [class.is-invalid]="dataNascita.invalid && dataNascita.touched">
+            <div *ngIf="dataNascita.errors && (dataNascita.invalid && dataNascita.touched)" style='float:right;'>
+                <small class="text-danger" *ngIf="dataNascita.errors.required">Campo Obbligatorio</small>
+                <small class="text-danger" *ngIf="dataNascita.errors.pattern">il formato data deve essere gg/mm/aaaa
+                </small>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="name">Residenza</label>
+            <input type="text" class="form-control" id="residenza" required [(ngModel)]="dipendente.residenza"
+                name="residenza" pattern=".{1,30}" #residenza="ngModel"
+                [class.is-invalid]="residenza.invalid && residenza.touched">
+            <div *ngIf="residenza.errors && (residenza.invalid && dataNascita.touched)" style='float:right;'>
+                <small class="text-danger" *ngIf="residenza.errors.required">Campo Obbligatorio</small>
+                <small class="text-danger" *ngIf="residenza.errors.pattern">il formato data deve essere gg/mm/aaaa
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Domicilio (se diverso da residenza)</label>
+            <input type="text" class="form-control" id="domicilio" required [(ngModel)]="dipendente.domicilio"
+                name="domicilio">
+        </div>
+        <div class="form-group">
+            <label for="name">Cellulare</label>
+            <input type="text" class="form-control" id="cellulare" required [(ngModel)]="dipendente.cellulare"
+                name="cellulare" pattern="^((00|\+)39[\. ]??)??3\d{2}[\. ]??\d{6,7}$" #cellulare="ngModel"
+                [class.is-invalid]="cellulare.invalid && cellulare.touched" placeholder="+39 e numero di cellulare">
+            <div *ngIf="cellulare.errors && (cellulare.invalid && cellulare.touched)" style='float:right;'>
+                <small class="text-danger" *ngIf="cellulare.errors.required">Campo Obbligatorio</small>
+                <small class="text-danger" *ngIf="cellulare.errors.pattern"> il telefono puo' includere +39 seguito dal
+                    numero cellulare
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Email personale</label>
+            <input type="text" class="form-control" id="email" required [(ngModel)]="dipendente.email" name="email"
+                pattern="^([a-zA-Z0-9_\.\-])+@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$" #email="ngModel"
+                [class.is-invalid]="email.invalid && email.touched">
+            <div *ngIf="email.errors && (email.invalid && email.touched)" style='float:right;'>
+                <small class="text-danger" *ngIf="email.errors.required">Campo Obbligatorio</small>
+                <small class="text-danger" *ngIf="email.errors.pattern"> Deve essere una email valida
+                </small>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="name">Email Aziendale</label>
+            <input type="text" class="form-control" id="emAziendale" required [(ngModel)]="dipendente.emAziendale" name="emAziendale"
+                pattern="^([a-zA-Z0-9_\.\-])+@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$" #emAziendale="ngModel"
+                [class.is-invalid]="emAziendale.invalid && emAziendale.touched">
+            <div *ngIf="emAziendale.errors && (email.invalid && email.touched)" style='float:right;'>
+                <small class="text-danger" *ngIf="emAziendale.errors.required">Campo Obbligatorio</small>
+                <small class="text-danger" *ngIf="emAziendale.errors.pattern"> Deve essere una email valida
+                </small>
+            </div>
+        </div>
+        <br>
+        
+
+        <button type="submit" class="btn btn-success">Salva</button>
+
+    </form>
+
+</div>
+</div>

@@ -1,0 +1,19 @@
+<div class="container">
+    <ul>
+      <li><a [routerLink]="['/basic']">Basic Select Example</a></li>
+    </ul>
+  
+    <router-outlet></router-outlet>
+  </div>
+
+  <h2>Basic mat-select Example</h2>
+  <mat-form-field>
+    <mat-label>Your Team</mat-label>
+    <mat-select [(ngModel)]="selectedItem">
+      <mat-option *ngFor="let team of teams" [value]="team.name">
+        {{team.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+<h3>Your Team is: {{selectedItem}}</h3>

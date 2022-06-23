@@ -1,0 +1,92 @@
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2 class="text-center">Dettaglio Dipendenti</h2>
+    </div>
+    <br>
+    <div class="panel-body">
+        <table class="table table-striped table-bordered ">
+            <thead>
+                <tr class="table-primary">
+                    <th>Azienda</th>
+                    <th>Nominativo</th>
+                    <th>Cliente</th>
+                    <th>Commessa</th>
+                    <th>Tariffa gg</th>
+                    <th>Costo Lordo gg</th>
+                    <th>Margine</th>
+                    <th>Markup</th>
+                    <th>Data Inizio Attività</th>
+                    <th>Data Fine Attività</th>
+                    <th>Modifica</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let dipendente of dipendenti "  >
+                    <td>{{dipendente.azienda.nome}}</td>
+                    <td>{{dipendente.nome}} {{dipendente.cognome}} </td>
+                    <td>{{dipendente.codiceFiscale}}</td>
+                    <td>{{dipendente.luogoNascita}}</td>
+                    <td>{{dipendente.age}}</td>
+                    <td>{{dipendente.residenza}}</td>
+                    <td>{{dipendente.domicilio}}</td>
+                    <td>{{dipendente.cellulare}}</td>
+                    <td>{{dipendente.email}}</td>
+                    <td>{{dipendente.emAziendale}}</td>
+                 <!-- <td><button  (click)="onUpdate(dipendente.codiceFiscale,dipendente.azienda.id, dipendente.azienda)" class="btn btn-info">Modifica</button> 
+                    | <button (click)="onArchivia(dipendente.codiceFiscale)" class="btn btn-danger">Archivia</button>
+                    </td>
+                    -->
+               
+                </tr>
+            </tbody>
+        </table>
+
+<!--
+       
+        <div class="footer-pagination">
+            <div class="row">
+                <div class="col-md-6"></div>
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-9" style="padding-left: 30%">
+                        
+                            <ngb-pagination [(page)]="thePageNumber"
+                                            [pageSize]="thePageSize"
+                                            [collectionSize]="theTotalElements"
+                                            [maxSize]="5"
+                                            [boundaryLinks] = "true"
+                                            (pageChange)="loadDipendenti()">
+
+                            </ngb-pagination>
+
+                        </div>
+                        
+                        <div class="col-md-3 mt-2" style="text-align: left;">
+                            <span class="mr-2">Page Size </span>
+
+                            <select (change)="updatePageSize($event)">
+                                
+                                <option selected="true">5</option>
+                                <option>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                            </select>
+                          <br><br><p><a  href="gestioneDipendenti/listaDipendenti">Visualizzazione Ridotta</a></p> 
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+   
+
+<div class="float-end" style="margin-right: 65px">
+    
+
+
+</div>-->

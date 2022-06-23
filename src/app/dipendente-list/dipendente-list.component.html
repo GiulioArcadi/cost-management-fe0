@@ -1,0 +1,159 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2 class="text-center">Lista Dipendenti</h2>
+    </div>
+    <br>
+    <div class="panel-body">
+       
+        <table class="table table-striped table-bordered table-hover ">
+            <thead>
+                <tr class="table-primary">
+                    <th><input
+                        type="checkbox"
+                        [checked]="saveEmail"
+                        (change)="saveEmail = !saveEmail"/> Select </th>
+                    <th>Azienda</th>
+                    <th>Nominativo</th>
+                    <th>Eta'</th>
+                    <th>Residenza</th>
+                    <th>Cellulare</th>
+                    <th>Email</th>
+                    <th>Email Aziendale</th>
+                    <th>Modifica</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let dipendente of dipendenti | async ">
+                    <td><input
+                        type="checkbox"
+                        [checked]="saveEmail"/></td>
+                    <td>{{dipendente.azienda.nome}}</td>
+                    <td>{{dipendente.nome}} {{dipendente.cognome}} </td>
+                    <td>{{dipendente.age}}</td>
+                    <td>{{dipendente.residenza}}</td>
+                    <td>{{dipendente.cellulare}}</td>
+                    <td>{{dipendente.email}}</td>
+                    <td>{{dipendente.emAziendale}}</td>
+                  <td> 
+                   <button  (click)="onUpdate(dipendente.codiceFiscale,dipendente.azienda.id, dipendente.azienda)" class="btn btn-info">Modifica</button> 
+                   | <button (click)="onArchivia(dipendente.codiceFiscale)" class="btn btn-danger">Archivia</button>
+                </td>              
+                </tr>              
+            </tbody>
+        
+        </table>
+   
+       
+        <div class="footer-pagination">
+            <div class="row">
+                <div class="col-md-6"></div>
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="d-flex justify-content-between p-2">
+                        
+                            <ngb-pagination [(page)]="thePageNumber"
+                                            [pageSize]="thePageSize"
+                                            [collectionSize]="theTotalElements"
+                                            [maxSize]="5"
+                                            [boundaryLinks] = "true"
+                                            (pageChange)="loadDipendenti()">
+
+                            </ngb-pagination>
+
+                        </div>
+                        
+                        <div class="col-md-3 mt-2" style="text-align: left;">
+                            <span class="mr-2">Page Size </span>
+
+                            <select (change)="updatePageSize($event)">
+                                
+                                <option selected="true">5</option>
+                                <option>10</option>
+                                <option>20</option>
+                                <option>50</option>
+                            </select>
+                          <br><br><p><a  href="dettaglioDipendenti">Visualizzazione dettaglio</a></p> 
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+   
+
+<div class="float-end" style="margin-right: 65px">
+    
+</div>
+
+
+<!--
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2 class="text-center">Lista Dipendenti</h2>
+    </div>
+    <br>
+     <div *ngIf="dataSource" class="panel-body" >
+ 
+        <mat-table [dataSource]="dataSource.content" class="mat-elevation-z8" matSort>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns:displayedColumns"></mat-row>
+              
+             <ng-container matColumnDef="azienda">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Azienda</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.azienda.nome}}</mat-cell>
+            </ng-container>
+       
+        <ng-container matColumnDef="nominativo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Nominativo</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.nome}} {{row.cognome}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="luogoNascita">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Luogo Nascita</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.luogoNascita}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="age">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Eta'</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.dataNascita}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="residenza">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Residenza</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.residenza}}</mat-cell>
+        </ng-container>
+   
+        <ng-container matColumnDef="domicilio">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Domicilio</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.domicilio}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="cellulare">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Cellulare</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.cellulare}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.email}}</mat-cell>
+        </ng-container>
+     <td><button (click)="onDelete(dipendente.codiceFiscale)" class="btn btn-danger">Delete</button> |
+            <button  (click)="onUpdate(dipendente.codiceFiscale,dipendente.azienda.id, dipendente.azienda)" 
+            class="btn btn-info">Update</button>
+
+        </mat-table>
+        <mat-paginator [length]="dataSource.totalElements"
+               [pageSize]="dataSource.pageable.pageSize"
+               [pageSizeOptions]="[5,10,25,50]"
+               (page)="pageEvent = $event; onPaginateChange($event)"
+               showFirstLastButtons
+               aria-label="Select page">
+</mat-paginator>
+
+     </div>
+
+    -->
+   
