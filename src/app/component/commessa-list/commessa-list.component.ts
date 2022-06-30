@@ -44,8 +44,8 @@ export class CommessaListComponent implements OnInit {
   onUpdate(codice: string) {
     this.router.navigate(['gestioneCommessa/commessaUpdate', codice]);
   }
-  onDelete(codice: string) {
-    this.commessaService.removeCommessa(codice).subscribe(
+  onArchivia(commessa: Commessa, codice: string) {
+    this.commessaService.archiviaCommessa(commessa, codice).subscribe(
       data => {
         console.log(data);
         this.reloadData();

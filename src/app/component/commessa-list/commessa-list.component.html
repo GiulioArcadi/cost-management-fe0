@@ -46,7 +46,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let commessa of commesse | async">
+                <ng-container *ngFor="let commessa of commesse | async">
+                <tr *ngIf="commessa.active!=0">
                     <td>{{commessa.codice}}</td>
                     <td>{{commessa.descrizioneCommessa}}</td>
                     <td>{{commessa.tipologiaCommessa}}</td>
@@ -54,11 +55,12 @@
                     <td>{{commessa.dataInizioCommessa}}</td>
                     <td>{{commessa.dataFineCommessa}}</td>
                     <td>
-                      <button (click)="onDelete(commessa.codice)" class="btn btn-danger">Archivia</button>
+                      <button (click)="onArchivia(commessa, commessa.codice)" class="btn btn-danger">Archivia</button>
                       &nbsp;&nbsp;
                         <button (click)="onUpdate(commessa.codice)" class="btn btn-info">Modifica</button>
                     </td>
                 </tr>
+            </ng-container>
             </tbody>
         </table>
     </div>

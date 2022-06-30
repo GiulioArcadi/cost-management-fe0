@@ -16,6 +16,8 @@ export class Commessa {
 
     importo: number;
 
+    active: number=1;
+
     
     
     constructor(){}

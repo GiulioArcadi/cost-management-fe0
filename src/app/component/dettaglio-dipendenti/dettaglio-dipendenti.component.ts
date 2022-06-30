@@ -40,9 +40,9 @@ export class DettaglioDipendentiComponent implements OnInit {
     this.router.navigate(['updateDipendente', codiceFiscale, aziendaId]);
   }
 
-  onArchivia(codiceFiscale: string) {
+  onArchivia(dipendente: Dipendente, codiceFiscale: string) {
   
-    this.dipendenteService.removeDipendente(codiceFiscale).subscribe(
+    this.dipendenteService.archiviaDipendente(dipendente, codiceFiscale).subscribe(
       data => {
         console.log(data);
         this.loadDipendenti();

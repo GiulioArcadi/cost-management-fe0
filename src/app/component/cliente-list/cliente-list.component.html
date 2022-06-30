@@ -47,7 +47,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let cliente of clienti | async">
+                    <ng-container *ngFor="let cliente of clienti | async">
+                    <tr *ngIf="cliente.active!=0">
                         <td>{{cliente.ragioneSociale}}</td>
                         <td>{{cliente.indirizzo}} {{cliente.ncivico}}, {{cliente.cap}} {{cliente.citta}}
                             {{cliente.provincia}}, {{cliente.stato}}</td>
@@ -55,11 +56,12 @@
                         <td>{{cliente.codiceFiscale}}</td>
                         <td>{{cliente.codiceInterscambio}}</td>
                         <td>{{cliente.pec}}</td>
-                        <td><button (click)="onDelete(cliente.partitaIva)" class="btn btn-danger">Archivia</button>
+                        <td><button (click)="onArchivia(cliente, cliente.partitaIva)" class="btn btn-danger">Archivia</button>
                             &nbsp;&nbsp;
                             <button (click)="onUpdate(cliente.partitaIva)" class="btn btn-info">Modifica</button>
                         </td>
                     </tr>
+                </ng-container>
                 </tbody>
             </table>
         </div>

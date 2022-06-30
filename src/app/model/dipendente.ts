@@ -28,6 +28,8 @@ export class Dipendente{
 
 	azienda : Azienda;
 
+	active: number=1;
+
 	constructor(){
 		
 	}

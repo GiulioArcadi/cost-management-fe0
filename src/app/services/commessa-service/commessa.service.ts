@@ -11,6 +11,7 @@ export class CommessaService {
   constructor(private http:HttpClient) { }
 
   private commesseUrl = 'http://localhost:8080/api/commessa-service/commesse';
+  private commessaaArchiviaUrl = 'http://localhost:8080/api/commessa-service/commesse/archivia';
 
   addCommessa(commessa:Commessa, clienteRagioneSociale: string) : Observable<any> {
     console.log("@@@@ "+commessa.codice);
@@ -36,8 +37,8 @@ export class CommessaService {
     return this.http.put(`${this.commesseUrl}/${codice}`, commessa);
   }
 
-  removeCommessa(codice: string): Observable<Object> {
-    return this.http.delete(`${this.commesseUrl}/${codice}`);
+  archiviaCommessa(commessa: Commessa, codice: string): Observable<any> {
+    return this.http.put(`${this.commessaaArchiviaUrl}/${codice}`, commessa);
   }
 
   findCommessaFilter(filter:string,radio:string):  Observable<any>{
@@ -46,9 +47,9 @@ export class CommessaService {
        case "0":
           return this.http.get(`${this.commesseUrl}/codice/${filter}`);
        case "1":
-          return this.http.get(`${this.commesseUrl}/dc/${filter}`);
+          return this.http.get(`${this.commesseUrl}/descrizione-commessa/${filter}`);
        case "2":
-          return this.http.get(`${this.commesseUrl}/tc/${filter}`);
+          return this.http.get(`${this.commesseUrl}/tipologia-contratto/${filter}`);
        default:
           return this.http.get(`${this.commesseUrl}`);
         }

@@ -103,9 +103,9 @@ export class DipendenteService {
     return this.http.put(`${this.dipendentiUrl}/${id}/${aziendaId}`, dipendente);
   }
 
-  removeDipendente(codiceFiscale: string): Observable<any> {
+  archiviaDipendente(dipendente: Dipendente, codiceFiscale: string): Observable<any> {
 
-    return this.http.delete(`${this.dipendentiUrl}/${codiceFiscale}`, { responseType: 'text' });
+    return this.http.put(`${this.dipendentiUrl}/${codiceFiscale}`, dipendente);
 
   }
 

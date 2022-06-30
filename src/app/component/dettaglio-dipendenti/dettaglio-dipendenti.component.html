@@ -36,7 +36,7 @@
                     <td>{{dipendente.email}}</td>
                     <td>{{dipendente.emAziendale}}</td>
                   <td><button  (click)="onUpdate(dipendente.codiceFiscale,dipendente.azienda.id, dipendente.azienda)" class="btn btn-info">Modifica</button> 
-                    | <button (click)="onArchivia(dipendente.codiceFiscale)" class="btn btn-danger">Archivia</button>
+                    | <button (click)="onArchivia(dipendente, dipendente.codiceFiscale)" class="btn btn-danger">Archivia</button>
                     </td>
                
                 </tr>

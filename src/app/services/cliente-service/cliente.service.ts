@@ -11,8 +11,8 @@ export class ClienteService {
   updateCliente(cliente: Cliente, partitaIva: string): Observable<Object> {
     return this.http.put(`${this.clienteUrl}/${partitaIva}`, cliente);
   }
-  removeCliente(partitaIva: string): Observable<any> {
-    return this.http.delete(`${this.clienteUrl}/${partitaIva}`, { responseType: 'text' });
+  archiviaCliente(cliente: Cliente, partitaIva: string): Observable<any> {
+    return this.http.put(`${this.clienteUrl}/archivia/${partitaIva}`, cliente);
   }
   findAllClienti(): Observable<any> {
     console.log("find allClienti CaLLED")
@@ -25,11 +25,11 @@ export class ClienteService {
   }
   
   findClienteByCf(codFisc: string): Observable<any> {
-    return this.http.get(`${this.clienteUrl}/cf/${codFisc}`);
+    return this.http.get(`${this.clienteUrl}/codice-fiscale/${codFisc}`);
 
   }
   findClienteByCi(codInter: string): Observable<any> {
-    return this.http.get(`${this.clienteUrl}/ci/${codInter}`);
+    return this.http.get(`${this.clienteUrl}/codice-interscambio/${codInter}`);
   }
 
   addCliente(cliente: Cliente): Observable<Object> {
@@ -41,15 +41,15 @@ export class ClienteService {
     console.info("called filter "+radio)
     switch ( radio ) {
        case "0":
-          return this.http.get(`${this.clienteUrl}/rs/${filter}`);
+          return this.http.get(`${this.clienteUrl}/ragione-sociale/${filter}`);
        case "1":
           return this.http.get(`${this.clienteUrl}/sl/${filter}`);
        case "2":
-          return this.http.get(`${this.clienteUrl}/pi/${filter}`);
+          return this.http.get(`${this.clienteUrl}/partita-iva/${filter}`);
        case "3":
-          return this.http.get(`${this.clienteUrl}/cf/${filter}`);
+          return this.http.get(`${this.clienteUrl}/codice-fiscale/${filter}`);
        case "4":
-          return this.http.get(`${this.clienteUrl}/ci/${filter}`);
+          return this.http.get(`${this.clienteUrl}/codice-interscambio/${filter}`);
        case "5":
           return this.http.get(`${this.clienteUrl}/pec/${filter}`);
        default:

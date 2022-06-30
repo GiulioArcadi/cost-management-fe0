@@ -24,7 +24,8 @@
             </thead>
 
             <tbody>
-                <tr *ngFor="let dipendente of dipendenti | async ">
+                <ng-container *ngFor="let dipendente of dipendenti | async">
+                <tr *ngIf="dipendente.active!=0">
                     <td><input
                         type="checkbox"
                         [checked]="saveEmail"/></td>
@@ -37,9 +38,10 @@
                     <td>{{dipendente.emAziendale}}</td>
                   <td> 
                    <button  (click)="onUpdate(dipendente.codiceFiscale,dipendente.azienda.id, dipendente.azienda)" class="btn btn-info">Modifica</button> 
-                   | <button (click)="onArchivia(dipendente.codiceFiscale)" class="btn btn-danger">Archivia</button>
+                   | <button (click)="onArchivia(dipendente, dipendente.codiceFiscale)" class="btn btn-danger">Archivia</button>
                 </td>              
-                </tr>              
+                </tr>  
+            </ng-container>            
             </tbody>
         
         </table>

@@ -28,8 +28,8 @@ export class ClienteListComponent implements OnInit{
   onAdd() {
     this.router.navigate(['clienti/add']);
   }
-  onDelete(partitaIva: string) {
-    this.clienteService.removeCliente(partitaIva).subscribe(
+  onArchivia(cliente: Cliente, partitaIva: string) {
+    this.clienteService.archiviaCliente(cliente, partitaIva).subscribe(
       data => {
         console.log(data);
         this.reloadData();

@@ -10,7 +10,7 @@ export class Cliente{
   cap: string
   codiceInterscambio:string
   pec:string
-  active=1
+  active:number=1
   constructor(){}
 
 }

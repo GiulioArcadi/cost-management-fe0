@@ -20,6 +20,7 @@ export class DipendenteListComponent implements OnInit {
   dipendenti: Observable<Dipendente[]>;
   dipendente: Dipendente;
   aziendaId : string;
+  testArray: Array<Dipendente[]>;
   
   //papgintion elements
   thePageNumber: number = 1;
@@ -28,7 +29,6 @@ export class DipendenteListComponent implements OnInit {
 
   //email checkbox
   saveEmail:boolean = false;
- 
 
   constructor(private dipendenteService: DipendenteService, private router: Router) {
     this.loadDipendenti();
@@ -49,9 +49,9 @@ export class DipendenteListComponent implements OnInit {
     this.router.navigate(['updateDipendente', codiceFiscale, aziendaId]);
   }
 
-  onArchivia(codiceFiscale: string) {
+  onArchivia(dipendente: Dipendente, codiceFiscale: string) {
   
-    this.dipendenteService.removeDipendente(codiceFiscale).subscribe(
+    this.dipendenteService.archiviaDipendente(dipendente, codiceFiscale).subscribe(
       data => {
         console.log(data);
         this.loadDipendenti();
@@ -73,6 +73,10 @@ onPaginateChange(event: PageEvent){
 
 }
 getEmail(){
+
+}
+
+rimuoviDipendente(){
 
 }
 
