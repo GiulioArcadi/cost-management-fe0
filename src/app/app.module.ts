@@ -35,6 +35,9 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { RegistrationComponent } from './component/registration/registration.component';
 import { TipologiacontrattoComponent } from './component/tipologiacontratto/tipologiacontratto.component';
 import { UpdateDipendenteComponent } from './component/update-dipendente/update-dipendente.component';
+import { clienteAddValidatorDirective } from 'src/app/cliente-add.directive';
+import { clienteAddSecValidatorDirective } from './cliente-add-sec-directive';
+import { CommessaRicercaComponent } from './component/commessa-ricerca/commessa-ricerca.component';
 @NgModule({
   declarations: [
     GestioneDipendenteComponent,
@@ -57,7 +60,10 @@ import { UpdateDipendenteComponent } from './component/update-dipendente/update-
     CommessaListComponent,
     DipendenteCommessaComponent,
     DettaglioDipendentiConformuleComponent,
-    DatiContrattualiComponent
+    DatiContrattualiComponent,
+    clienteAddValidatorDirective,
+    clienteAddSecValidatorDirective,
+    CommessaRicercaComponent,
     
        
   ],

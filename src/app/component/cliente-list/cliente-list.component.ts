@@ -13,6 +13,7 @@ export class ClienteListComponent implements OnInit{
   clienti: Observable<Cliente[]>;
   filter:string
   radio:string
+  clientelist:Cliente[];
   constructor(private clienteService: ClienteService, private router: Router) {
     this.reloadData();
   }
@@ -21,6 +22,9 @@ export class ClienteListComponent implements OnInit{
   }
   reloadData() {
     this.clienti = this.clienteService.findClienteFilter(this.filter,this.radio);
+    this.clienti.subscribe(data=>{
+      this.clientelist=data;
+    });
   }
   onUpdate(partitaIva: string) {
     this.router.navigate(['clienti/', partitaIva]);

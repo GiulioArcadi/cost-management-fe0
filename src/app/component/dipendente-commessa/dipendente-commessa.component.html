@@ -22,7 +22,7 @@
                 </mat-form-field>
             </div>
             </div>
-            <div *ngIf="tipologiaCommessa == 'Produzione'" class="form-group" class="form-horizontal">
+            <div *ngIf="tipologiaCommessa == 'Product'" class="form-group" class="form-horizontal">
                  - <span style="color:brown">Produzione </span> -- <span> Importo Totale: {{commessa.importo | number:'1.2-2'}} EUR</span>  <hr>
             </div>
             <div *ngIf="tipologiaCommessa == 'Time Material'" class="form-group" class="form-horizontal">
@@ -113,6 +113,10 @@
                         gg/mm/aaaa
                     </small>
                 </div>
+                <br>
+                <div *ngIf="messageError!=null" class="alert alert-danger">
+                    <p [innerText]= messageError></p>
+                    </div>
 
                 <br>
             <button type="submit" class="btn btn-success">Inserisci</button>

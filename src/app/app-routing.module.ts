@@ -5,6 +5,7 @@ import { ClienteListComponent } from './component/cliente-list/cliente-list.comp
 import { ClienteUpdateComponent } from './component/cliente-update/cliente-update.component';
 import { CommessaAddComponent } from './component/commessa-add/commessa-add.component';
 import { CommessaListComponent } from './component/commessa-list/commessa-list.component';
+import { CommessaRicercaComponent } from './component/commessa-ricerca/commessa-ricerca.component';
 import { CommessaUpdateComponent } from './component/commessa-update/commessa-update.component';
 import { CreateDipendenteComponent } from './component/create-dipendente/create-dipendente.component';
 import { DatiContrattualiComponent } from './component/dati-contrattuali/dati-contrattuali.component';
@@ -45,6 +46,8 @@ const routes: Routes = [
   { path: "gestioneCommessa/commessaAdd" , component: CommessaAddComponent},
   { path: "gestioneCommessa/commessaUpdate/:codice" , component: CommessaUpdateComponent},
   { path: "gestioneCommessa/commessaList" , component: CommessaListComponent},
+  { path: "gestioneCommessa/commessaRicerca" , component: CommessaRicercaComponent},
+  { path: "gestioneCommessa/commessaRicerca/:nominativo" , component: CommessaRicercaComponent},
   { path: "gestioneCommessa/dipendente_commessa" , component: DipendenteCommessaComponent},
   { path: "gestioneDipendenti/dettaglio_dipendenti_conformule" , component: DettaglioDipendentiConformuleComponent}
 

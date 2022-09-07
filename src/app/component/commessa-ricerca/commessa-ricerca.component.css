@@ -1,0 +1,58 @@
+  .parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .buttonHolder{ text-align: center; }
+
+
+mat-form-field {
+  width:100%;
+}
+
+table{
+    display:table;
+    width:max-content;
+    margin-left: auto;
+    margin-right: auto;
+    border-left: solid 1px lightgrey;
+    border-right: solid 1px lightgrey;
+}
+
+/* label{
+  display:inline-block;
+} */
+
+.my-select-panel-class {
+  background: red;
+  font-size: medium;
+}
+
+h2{
+  padding-top: 20px;
+}
+
+.button1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#b1{
+    margin-right: 20px;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+

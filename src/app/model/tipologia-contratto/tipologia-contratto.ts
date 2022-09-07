@@ -1,5 +1,10 @@
 export class TipologiaContratto {
-    tipologia:string | undefined;
+
+    tipologia:string;
+    
+    id: number;
+
+    active: number = 1;
 
     constructor()
     {

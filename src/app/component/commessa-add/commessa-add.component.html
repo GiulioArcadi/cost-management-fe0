@@ -19,11 +19,10 @@
             <br>
             <div class="form-group">
                 <label for="descrizioneCommessa">Descrizione Commessa</label>
-                <input type="text" class="form-control" id="descrizioneCommessa" required [(ngModel)]="commessa.descrizioneCommessa"
+                <input type="text" class="form-control" id="descrizioneCommessa" [(ngModel)]="commessa.descrizioneCommessa"
                     pattern="^[a-zA-Z\s]*$" #descrizioneCommessa="ngModel" [class.is-invalid]="descrizioneCommessa.invalid && descrizioneCommessa.touched"
                     name="descrizioneCommessa">
                 <div *ngIf="descrizioneCommessa.errors && (descrizioneCommessa.invalid && descrizioneCommessa.touched)" style='float:right;'>
-                    <small class="text-danger" *ngIf="descrizioneCommessa.errors.required">Campo Obbligatorio</small>
                     <small class="text-danger" *ngIf="descrizioneCommessa.errors.pattern">inserire massimo 30 caratteri alfabetici</small>
                 </div>
             </div>
@@ -86,7 +85,7 @@
                     <mat-label>Cliente</mat-label>
                     <mat-select (selectionChange)="changeClient($event.value)" placeholder="Cliente">
                         <mat-option *ngFor="let cliente of clienti | async  " [value]="cliente.partitaIva">
-                            {{cliente.ragioneSociale}} ({{cliente.partitaIva}})
+                            {{cliente.ragioneSociale}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

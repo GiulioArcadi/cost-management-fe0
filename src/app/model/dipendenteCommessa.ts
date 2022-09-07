@@ -10,8 +10,9 @@ export class DipendenteCommessa {
 
   dataFineAttivita: Date;
 
-  tariffaGg: string;
+  tariffaGg: number;
 
+  dipendente: Dipendente;
   //importo: string;
 
   constructor() {

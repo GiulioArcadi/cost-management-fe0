@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Contratto } from 'src/app/model/contratto';
 import { Daticontratto } from 'src/app/model/daticontratto';
@@ -22,9 +23,11 @@ export class DatiContrattualiComponent implements OnInit {
 
   tipologie : TipologiaContratto[];
 
+  selezioneTipologie = 0;
+
   constructor(private contrattoService: ContrattoService,
     private tipologiacontrattoService:TipologiacontrattoService,
-    private dipendenteService:DipendenteService) {
+    private dipendenteService:DipendenteService, private router: Router) {
     this.reloadData();
    }
 
@@ -53,17 +56,32 @@ export class DatiContrattualiComponent implements OnInit {
     });
   }
 
-  Save(index:number)
-  {
-    this.daticontrattuali.subscribe(datocontrattuale => {
-        this.dipendenteService.findDipendenteById(datocontrattuale[index].codiceFiscale).subscribe(result => {
-          this.contratti[index].dipendente = result;
-          
-          console.log(this.contratti);
+  selectionChanged(value, index){
 
-          console.log(this.contrattoService.insertContratto(this.contratti[index]).toPromise());
+    if(value==this.tipologie[0]){
+      this.selezioneTipologie= null;
+    } else {
+      this.selezioneTipologie = index;
+    }
+  }
+
+  Save(index: number) {
+    this.daticontrattuali.subscribe(datocontrattuale => {
+      this.dipendenteService.findDipendenteById(datocontrattuale[index].codiceFiscale).subscribe(result => {
+        this.contratti[index].dipendente = result;
+
+        this.contrattoService.insertContratto(this.contratti[index]).toPromise().then(res => {
+
+          console.log(res);
+
+          alert("Contratto salvato");
+
+          this.router.navigate(['gestioneDipendenti']);
+        }).catch(error => {
+          console.log(error)
         });
-    });
+      }, error => console.log(error));
+    }, error => console.log(error));
   }
 
 }

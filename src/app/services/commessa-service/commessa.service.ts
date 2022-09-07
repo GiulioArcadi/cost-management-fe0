@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Cliente } from 'src/app/model/cliente';
 import { Commessa } from 'src/app/model/commessa';
 
 @Injectable({
@@ -11,7 +12,11 @@ export class CommessaService {
   constructor(private http:HttpClient) { }
 
   private commesseUrl = 'http://localhost:8080/api/commessa-service/commesse';
+  private commesseDipendentiUrl = 'http://localhost:8080/api/commessa-service/commesse-dipendenti';
+  private commesseClientiUrl = 'http://localhost:8080/api/commessa-service/commesse-clienti';
   private commessaaArchiviaUrl = 'http://localhost:8080/api/commessa-service/commesse/archivia';
+  private commesseAttualiUrl = 'http://localhost:8080/api/commessa-service/commesse-attauli';
+  private commesseStoricoUrl = 'http://localhost:8080/api/commessa-service/commesse-storico';
 
   addCommessa(commessa:Commessa, clienteRagioneSociale: string) : Observable<any> {
     console.log("@@@@ "+commessa.codice);
@@ -53,6 +58,26 @@ export class CommessaService {
        default:
           return this.http.get(`${this.commesseUrl}`);
         }
+  }
+
+  findDipendentiByCommessa(commessa: Commessa): Observable<any>{
+    return this.http.post(`${this.commesseDipendentiUrl}`, commessa);
+  }
+
+  findCommesseByCliente(cliente: Cliente): Observable<any>{
+    return this.http.post(`${this.commesseClientiUrl}`, cliente);
+  }
+
+  findCommesseByClienteNominativo(cliente: Cliente, nominativo: string): Observable<any>{
+    return this.http.post(`${this.commesseClientiUrl}/${nominativo}`, cliente);
+  }
+
+  findCommesseAttuali(commessa: Commessa):Observable<any>{
+    return this.http.post(`${this.commesseAttualiUrl}`, commessa);
+  }
+
+  findCommesseStorico(commessa: Commessa):Observable<any>{
+    return this.http.post(`${this.commesseStoricoUrl}`, commessa);
   }
 
 }

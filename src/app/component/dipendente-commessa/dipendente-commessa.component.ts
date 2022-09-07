@@ -28,6 +28,7 @@ export class DipendenteCommessaComponent implements OnInit {
   dipendenti = new Observable<Dipendente[]>();
   dipdendenteCommmessaPK = new DipendenteCommessaPK(this.dipendenteCommessaCodice, this.dipendenteCommessaDipendente);
   tipologiaCommessa: string;
+  messageError: string = null;
   
  
   //associa riosrsa tariffa
@@ -103,7 +104,7 @@ export class DipendenteCommessaComponent implements OnInit {
       .then(res => {
         console.log(res);
         if (res == null) {
-          alertify.error("Il dipendente e' gia' associato a questa commessa!");
+          this.messageError="Il dipendente e' gia' associato a questa commessa!";
         } else {
           this.goToList();
         }
@@ -117,7 +118,7 @@ export class DipendenteCommessaComponent implements OnInit {
   }
 
   goToList() {
-    alertify.success('Dipendente inserito!');
+    alert('Dipendente inserito!');
     this.tipologiaCommessa ="";
     this.aggiungiTriffaComboBox = false;
     this.ngOnInit();

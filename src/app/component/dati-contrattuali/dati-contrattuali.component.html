@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-            <tr *ngFor = "let daticontratto of daticontrattuali | async;let i =index">
+            <tr *ngFor = "let daticontratto of daticontrattuali | async; let i = index">
                 <td>
                     {{daticontratto.azienda}}
                 </td>
@@ -26,7 +26,7 @@
                 </td>
                 <td>
                     <select class="form-select" aria-label="Default select example"
-                     [(ngModel)]="contratti[i].tipologiaContrattoBean"
+                     [(ngModel)]="contratti[i].tipologiaContrattoBean" (change)="selectionChanged(contratti[i].tipologiaContrattoBean, i)"
                      required #Select="ngModel" [class.is-invalid]="Select.invalid && Select.touched">
                         <option [ngValue]="">
 
@@ -75,7 +75,7 @@
                      class="form-control" 
                      name="Fine"
                      [(ngModel)]="contratti[i].dataFineContratto"
-                     required
+                     [required]="selezioneTipologie === i"
                      #Fine="ngModel"
                      [class.is-invalid]="Fine.invalid && Fine.touched">
                 </td>

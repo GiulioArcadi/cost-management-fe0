@@ -26,6 +26,7 @@ export class CreateDipendenteComponent implements OnInit {
   aziendaFromProperties: Observable<Azienda>;
   aziendaById: Azienda;
   aziendaByNome: Azienda;
+  messageError: string = null;
 
   //check future date 
   futureDateError: boolean;
@@ -69,8 +70,8 @@ export class CreateDipendenteComponent implements OnInit {
       addDipendente(this.dipendente, this.selectedeAziendaId).toPromise()
       .then(res => {
           if (res == null) {
-            alertify.error("Il dipendente e' gia' esistente nel database!" +
-              " Inserisci un codice fiscale che non e' presente.");
+            this.messageError="Il dipendente e' gia' esistente nel database!" +
+              " Inserisci un codice fiscale che non e' presente.";
           } else {
             this.goToList();
           }

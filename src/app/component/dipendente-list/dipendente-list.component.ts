@@ -42,6 +42,7 @@ export class DipendenteListComponent implements OnInit {
   async loadDipendenti() {
     await new Promise(f => setTimeout(f, 50));
     this.dipendenti = this.dipendenteService.findAllDipendenti();
+    console.log("stampa dipendenti"+this.dipendenti);
   }
 
   onUpdate(codiceFiscale: string, aziendaId: number,azienda: Azienda) {

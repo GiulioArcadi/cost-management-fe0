@@ -1,4 +1,6 @@
 import { Cliente } from "./cliente";
+import { Dipendente } from "./dipendente";
+import { DipendenteCommessa } from "./dipendenteCommessa";
 
 export class Commessa {
 
@@ -18,7 +20,11 @@ export class Commessa {
 
     active: number=1;
 
-    
+    dipendenteCommesse: DipendenteCommessa;
+
+    nomeDipendente: String;
+
+    dipendenti: Array<Dipendente>;
     
     constructor(){}
 

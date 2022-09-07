@@ -3,6 +3,8 @@ import { TipologiaContratto } from 'src/app/model/tipologia-contratto/tipologia-
 
 export class Contratto{
 
+    id: number;
+    active: number = 1;
     costoGg:number;
     dataFineContratto:Date;
     dataInizioContratto:Date;

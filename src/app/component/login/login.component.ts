@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/model/user/user';
 import { AuthenticationService } from 'src/app/services/authentication-service/authentication.service';
 import { LoginRegistrationService } from 'src/app/services/login-registration-service/login-registration.service';
@@ -14,7 +15,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 export class LoginComponent implements OnInit {
   user = new User();
   msg = "";
-  constructor(private service : LoginRegistrationService,private auth : AuthenticationService) { }
+  constructor(private service : LoginRegistrationService,private auth : AuthenticationService, private router : Router ) { }
 
   ngOnInit(): void {
   }
@@ -42,6 +43,10 @@ export class LoginComponent implements OnInit {
   prova()
   {
     this.auth.authenticate();
+  }
+
+  test(){
+    this.router.navigate(['/test']);
   }
 
 }

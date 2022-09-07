@@ -44,4 +44,10 @@ export class DipendenteCommessaService {
  
  dipendenteCommessa);
   }
+
+  findAllDipendenteCommessa(): Observable<any>{
+
+    return this.http.get(`${this.dipendipendenteCommessaUrl}`);
+  }
+
 }

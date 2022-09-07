@@ -3,9 +3,15 @@ import { Dipendente } from "./dipendente";
 
 export class DipendenteCommessaPK{
 
-    
+    codiceCommessa : string;
 
-    constructor(public codiceCommessa : string, public   dipendenteCodiceFiscale: string ){
+    dipendenteCodiceFiscale: string;
+
+    constructor(codiceCommessa : string, dipendenteCodiceFiscale: string){
+
+        this.codiceCommessa = codiceCommessa;
+
+        this.dipendenteCodiceFiscale = dipendenteCodiceFiscale;
        
     }
     

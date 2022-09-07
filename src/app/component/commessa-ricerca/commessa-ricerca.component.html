@@ -1,0 +1,87 @@
+<div class="parent">
+    <h2 class="text-center">Ricerca Commessa</h2>
+    <br>
+
+    <div style="width: 400px;">
+        <form (ngSubmit)="onSubmit()">
+            <div>
+                <div class="form-field-group">
+                    <label for="nominativo">Cliente</label>
+                    <mat-form-field appearance="outline">
+                        <mat-select (selectionChange)="changeCliente($event.value)" panelClass="my-select-panel-class" placeholder="Cliente*">
+                            <mat-option *ngFor="let cliente of clienti | async  " [value]="cliente.partitaIva">
+                                {{cliente.ragioneSociale}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <br>
+            <div class="form-group">
+                <label for="nominativo">Nominativo</label>
+                <input type="text" class="form-control" #nominativo name="nominativo" (keyup)="onKeyUp()">
+                <!-- <div *ngIf="nominativo.errors && (nominativo.invalid && nominativo.touched)" style='float:right;'>
+                    <small class="text-danger" *ngIf="nominativo.errors.required">Campo Obbligatorio</small>
+                    <small class="text-danger" *ngIf="nominativo.errors.pattern">inserire massimo 30 caratteri alfabetici
+                    </small>
+                </div> -->
+            </div>
+            <br>
+            <div class="button1">
+                <button id="b1" type="submit" class="btn btn-outline-light text-primary"
+                    (click)="mostraCommesseAttuali()" [routerLink]="['/gestioneCommessa/commessaRicerca'+'/'+nominativo1]">Attuali</button>
+                <button id="b1" type="submit" class="btn btn-outline-light text-primary"
+                    (click)="mostraCommesseStorico()" [routerLink]="['/gestioneCommessa/commessaRicerca'+'/'+nominativo1]">Storico</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<br>
+
+<div *ngIf="commessaAttuali == true" class="panel-body">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Descrizione Commessa</th>
+                <th>Tipologia Commessa</th>
+                <th>Data Inizio Commessa</th>
+                <th>Data Fine Commessa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let com of commesseRecuperate">
+                <tr>
+                    <td>{{com.descrizioneCommessa}}</td>
+                    <td>{{com.tipologiaCommessa}}</td>
+                    <td>{{com.dataInizioCommessa}}</td>
+                    <td>{{com.dataFineCommessa}}</td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="commessaStorico == true" class="panel-body">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Descrizione Commessa</th>
+                <th>Tipologia Commessa</th>
+                <th>Data Inizio Commessa</th>
+                <th>Data Fine Commessa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container>
+                <tr>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
