@@ -45,8 +45,4 @@ export class LoginComponent implements OnInit {
     this.auth.authenticate();
   }
 
-  test(){
-    this.router.navigate(['/test']);
-  }
-
 }
