@@ -69,13 +69,25 @@ export class CommessaRicercaComponent implements OnInit {
     if (this.nominativo!=null && this.cliente!=null) {
       this.commessaService.findCommesseByClienteNominativo(this.cliente, this.nominativo1).subscribe(data => {
         this.commesseRecuperate = data;
+        /* recupera le commesse con data fine attività null o successive alla data corrente*/
+        for (let i = 0; i < this.commesseRecuperate.length; i++) {
+          this.commessaService.findCommesseAttuali(this.commesseRecuperate[i]).subscribe(data => {
+            this.commesseVerificate = data;
+          }, error => console.log(error))
+        }
       },error => console.log(error));
       /* recupera le commesse tramite il cliente selezionato */
-    }else{
-      if (this.cliente!=null){
+    } else {
+      if (this.cliente != null) {
         this.commessaService.findCommesseByCliente(this.cliente).subscribe(data => {
           this.commesseRecuperate = data;
           console.log(this.commesseRecuperate);
+          /* recupera le commesse con data fine attività null o successive alla data corrente*/
+          for (let i = 0; i < this.commesseRecuperate.length; i++) {
+            this.commessaService.findCommesseAttuali(this.commesseRecuperate[i]).subscribe(data => {
+              this.commesseVerificate = data;
+            }, error => console.log(error))
+          }
         }, error => console.log(error));
       }
     }
@@ -89,6 +101,13 @@ export class CommessaRicercaComponent implements OnInit {
     if (this.nominativo!=null && this.cliente!=null) {
       this.commessaService.findCommesseByClienteNominativo(this.cliente, this.nominativo1).subscribe(data => {
         this.commesseRecuperate = data;
+        console.log(this.commesseRecuperate);
+        /* recupera le commesse con data fine attività precedenti alla data corrente*/
+        for (let i = 0; i < this.commesseRecuperate.length; i++) {
+          this.commessaService.findCommesseStorico(this.commesseRecuperate[i]).subscribe(data => {
+            this.commesseVerificate = data;
+          }, error => console.log(error))
+        }
       },error => console.log(error));
       /* recupera le commesse tramite il cliente selezionato */
     }else{
@@ -96,6 +115,12 @@ export class CommessaRicercaComponent implements OnInit {
         this.commessaService.findCommesseByCliente(this.cliente).subscribe(data => {
           this.commesseRecuperate = data;
           console.log(this.commesseRecuperate);
+          /* recupera le commesse con data fine attività precedenti alla data corrente*/
+          for (let i = 0; i < this.commesseRecuperate.length; i++) {
+            this.commessaService.findCommesseStorico(this.commesseRecuperate[i]).subscribe(data => {
+              this.commesseVerificate = data;
+            }, error => console.log(error))
+          }
         }, error => console.log(error));
       }
     }

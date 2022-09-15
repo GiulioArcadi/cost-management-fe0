@@ -51,12 +51,12 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let com of commesseRecuperate">
+            <ng-container *ngFor="let com of commesseVerificate">
                 <tr>
                     <td>{{com.descrizioneCommessa}}</td>
                     <td>{{com.tipologiaCommessa}}</td>
                     <td>{{com.dataInizioCommessa}}</td>
-                    <td>{{com.dataFineCommessa}}</td>
+                    <td><ng-container *ngIf="com.dataFineCommessa!=null">{{com.dataFineCommessa}}</ng-container></td>
                 </tr>
             </ng-container>
         </tbody>
@@ -74,12 +74,12 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container>
+            <ng-container *ngFor="let com of commesseVerificate">
                 <tr>
-                    <td>---</td>
-                    <td>---</td>
-                    <td>---</td>
-                    <td>---</td>
+                    <td>{{com.descrizioneCommessa}}</td>
+                    <td>{{com.tipologiaCommessa}}</td>
+                    <td>{{com.dataInizioCommessa}}</td>
+                    <td><ng-container *ngIf="com.dataFineCommessa!=null">{{com.dataFineCommessa}}</ng-container></td>
                 </tr>
             </ng-container>
         </tbody>

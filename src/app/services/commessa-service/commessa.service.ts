@@ -15,7 +15,7 @@ export class CommessaService {
   private commesseDipendentiUrl = 'http://localhost:8080/api/commessa-service/commesse-dipendenti';
   private commesseClientiUrl = 'http://localhost:8080/api/commessa-service/commesse-clienti';
   private commessaaArchiviaUrl = 'http://localhost:8080/api/commessa-service/commesse/archivia';
-  private commesseAttualiUrl = 'http://localhost:8080/api/commessa-service/commesse-attauli';
+  private commesseAttualiUrl = 'http://localhost:8080/api/commessa-service/commesse-attuali';
   private commesseStoricoUrl = 'http://localhost:8080/api/commessa-service/commesse-storico';
 
   addCommessa(commessa:Commessa, clienteRagioneSociale: string) : Observable<any> {
