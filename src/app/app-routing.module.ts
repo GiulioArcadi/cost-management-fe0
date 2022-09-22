@@ -10,6 +10,7 @@ import { CommessaUpdateComponent } from './component/commessa-update/commessa-up
 import { CreateDipendenteComponent } from './component/create-dipendente/create-dipendente.component';
 import { DatiContrattualiComponent } from './component/dati-contrattuali/dati-contrattuali.component';
 import { DettaglioDipendentiConformuleComponent } from './component/dettaglio-dipendenti-conformule/dettaglio-dipendenti-conformule.component';
+import { DettaglioDipendentiStoricoComponent } from './component/dettaglio-dipendenti-storico/dettaglio-dipendenti-storico.component';
 import { DettaglioDipendentiComponent } from './component/dettaglio-dipendenti/dettaglio-dipendenti.component';
 import { DipendenteCommessaComponent } from './component/dipendente-commessa/dipendente-commessa.component';
 import { DipendenteListComponent } from './component/dipendente-list/dipendente-list.component';
@@ -49,7 +50,8 @@ const routes: Routes = [
   { path: "gestioneCommessa/commessaRicerca" , component: CommessaRicercaComponent},
   { path: "gestioneCommessa/commessaRicerca/:nominativo" , component: CommessaRicercaComponent},
   { path: "gestioneCommessa/dipendente_commessa" , component: DipendenteCommessaComponent},
-  { path: "gestioneDipendenti/dettaglio_dipendenti_conformule" , component: DettaglioDipendentiConformuleComponent}
+  { path: "gestioneDipendenti/dettaglio_dipendenti_conformule" , component: DettaglioDipendentiConformuleComponent},
+  { path: "gestioneDipendenti/dettaglio_dipendenti_storico" , component: DettaglioDipendentiStoricoComponent}
 
 
 ];
