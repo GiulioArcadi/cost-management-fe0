@@ -38,6 +38,7 @@ import { UpdateDipendenteComponent } from './component/update-dipendente/update-
 import { clienteAddValidatorDirective } from 'src/app/cliente-add.directive';
 import { clienteAddSecValidatorDirective } from './cliente-add-sec-directive';
 import { CommessaRicercaComponent } from './component/commessa-ricerca/commessa-ricerca.component';
+import { DettaglioDipendentiStoricoComponent } from './component/dettaglio-dipendenti-storico/dettaglio-dipendenti-storico.component';
 @NgModule({
   declarations: [
     GestioneDipendenteComponent,
@@ -64,6 +65,7 @@ import { CommessaRicercaComponent } from './component/commessa-ricerca/commessa-
     clienteAddValidatorDirective,
     clienteAddSecValidatorDirective,
     CommessaRicercaComponent,
+    DettaglioDipendentiStoricoComponent,
     
        
   ],
