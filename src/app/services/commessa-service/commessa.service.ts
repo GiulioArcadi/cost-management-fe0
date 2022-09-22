@@ -17,16 +17,12 @@ export class CommessaService {
   private commessaaArchiviaUrl = 'http://localhost:8080/api/commessa-service/commesse/archivia';
   private commesseAttualiUrl = 'http://localhost:8080/api/commessa-service/commesse-attuali';
   private commesseStoricoUrl = 'http://localhost:8080/api/commessa-service/commesse-storico';
+  private commesseClienteUrl = 'http://localhost:8080/api/commessa-service/commesse/cliente';
 
-  addCommessa(commessa:Commessa, clienteRagioneSociale: string) : Observable<any> {
-    console.log("@@@@ "+commessa.codice);
-    console.log("##### "+commessa.descrizioneCommessa);
-    console.log("$$$$$$ " +commessa.dataInizioCommessa);
-    console.log(" %%%%%%% " +commessa.dataFineCommessa);
-    console.log("&&&&& "+ commessa.tipologiaCommessa);
+  addCommessa(commessa:Commessa) : Observable<any> {
     //console.log("****** PIVA "+ commessa.cliente.partitaIva);
     //console.log("(((((( "+ commessa.cliente.ragioneSociale);
-    return this.http.post(`${this.commesseUrl}/${clienteRagioneSociale}`,commessa);
+    return this.http.post(`${this.commesseUrl}`,commessa);
   }
 
   findAllCommesse():Observable<any>{
@@ -78,6 +74,10 @@ export class CommessaService {
 
   findCommesseStorico(commessa: Commessa):Observable<any>{
     return this.http.post(`${this.commesseStoricoUrl}`, commessa);
+  }
+
+  updateCommessaCliente(cliente: string, codice: string): Observable<Object> {
+    return this.http.put(`${this.commesseClienteUrl}/${cliente}/${codice}`, null);
   }
 
 }

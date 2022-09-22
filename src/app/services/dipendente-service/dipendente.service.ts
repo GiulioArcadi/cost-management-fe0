@@ -47,6 +47,10 @@ export class DipendenteService {
   private dipendentiUrl = 'http://localhost:8080/api/dipendente-service/dipendenti';
   private dipendentiUrlPaginated = 'http://localhost:8080/api/dipendente-service/dipendenti-paginated';
   private aziendeUrl = 'http://localhost:8080/api/dipendente-service/dipendenti';
+  private dipendentiBeanUrl = 'http://localhost:8080/api/dipendente-service/dipendenti/dipendente';
+  private dipendentiDataUrl = 'http://localhost:8080/api/dipendente-service/dipendenti/data';
+  private dipendentiAttualiUrl = 'http://localhost:8080/api/dipendente-service/dipendenti/attuali';
+  private dipendentiStoricoUrl = 'http://localhost:8080/api/dipendente-service/dipendenti/storico';
 
   //async call to service in backend with Observable Object
   addDipendente(dipendente: Dipendente, id: number): Observable<any> {
@@ -109,17 +113,30 @@ export class DipendenteService {
 
   }
 
-
-
   findDipendenteById(id: string): Observable<any> {
     return this.http.get(`${this.dipendentiUrl}/${id}`);
 
   }
 
-
   findAziendaById(id: string): Observable<any> {
     return this.http.get(`${this.aziendeUrl}/${id}`);
   }
 
+  findAllDipendentiBean():Observable<any>{
+  return this.http.get(`${this.dipendentiBeanUrl}`);
+  }
+
+  updateDipendenteData(data: Date, codiceFiscale: string): Observable<Object> {
+
+    return this.http.put(`${this.dipendentiDataUrl}/${data}/${codiceFiscale}`, null);
+  }
+
+  findDipendentiAttuali(dipendente: Dipendente): Observable<any> {
+    return this.http.post(`${this.dipendentiAttualiUrl}`, dipendente);
+  }
+
+  findDipendentiStorico(dipendente: Dipendente): Observable<any> {
+    return this.http.post(`${this.dipendentiStoricoUrl}`, dipendente);
+  }
 
 }
