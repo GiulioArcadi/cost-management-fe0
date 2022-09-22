@@ -10,9 +10,9 @@ export class Commessa {
 
     tipologiaCommessa: string;
 
-    dataInizioCommessa: String;
+    dataInizioCommessa: Date;
     
-    dataFineCommessa:String;
+    dataFineCommessa: Date;
 
     cliente: Cliente;
 
