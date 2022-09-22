@@ -15,6 +15,10 @@ export class DipendenteCommessa {
   dipendente: Dipendente;
   //importo: string;
 
+  commessa: Commessa;
+
+  active: number=1;
+
   constructor() {
     this.id = new DipendenteCommessaPK("","");
     //this.importo = "0";

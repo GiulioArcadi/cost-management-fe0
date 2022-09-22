@@ -1,4 +1,7 @@
 import { Azienda } from "./azienda";
+import { Commessa } from "./commessa";
+import { Contratto } from "./contratto";
+import { DipendenteCommessa } from "./dipendenteCommessa";
 
 export class Dipendente{
 	
@@ -29,6 +32,12 @@ export class Dipendente{
 	azienda : Azienda;
 
 	active: number=1;
+
+	dipendenteCommesse: DipendenteCommessa;
+
+	contratti: Contratto;
+
+	commessa: Commessa;
 
 	constructor(){
 		
