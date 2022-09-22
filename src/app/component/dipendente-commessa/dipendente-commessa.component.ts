@@ -76,7 +76,6 @@ export class DipendenteCommessaComponent implements OnInit {
   changeDipendente(value: any) {
     if (!(Object.keys(this.dipendente).length === 0)) {
      this.dipendenteCommessa.tariffaGg = null;
-      this.dipendenteCommessa.dataFineAttivita = new Date();
       this.dipendenteCommessa.dataInizioAttivita = new Date();
 
     }
