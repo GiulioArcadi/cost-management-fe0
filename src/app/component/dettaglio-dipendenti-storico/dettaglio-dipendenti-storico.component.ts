@@ -35,14 +35,18 @@ export class DettaglioDipendentiStoricoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /* recupera tutti i dipendenti */
   async loadDipendenti() {
     await new Promise(f => setTimeout(f, 50));
     this.dipendenti = this.dipendenteService.findAllDipendentiBean();
     this.dipendenti.subscribe(data =>{
       this.dipendente = data;
+      /* scorre i dipendenti, vengono inseriti in un metodo che restituisce una lista di dipendenti con data
+      fine attività successiva a quella odierna */
       for (let i = 0; i < this.dipendente.length; i++) {
         this.dipendenteService.findDipendentiStorico(this.dipendente[i]).subscribe(data=> {
           this.dipendentiRecuperati = data;
+          /* inserisce i dipendenti recuperati in un array */
           for (let i = 0; i < this.dipendentiRecuperati.length; i++) {
             this.dipendentiStorico.push(this.dipendentiRecuperati[i]);
           }
@@ -52,20 +56,10 @@ export class DettaglioDipendentiStoricoComponent implements OnInit {
     })
   }
 
+  /* recupera tutti i clienti */
   async loadClienti() {
     await new Promise(f => setTimeout(f, 50));
     this.clienti = this.clienteService.findAllClienti();
-  }
-
-  changeCliente(val: any, codice: any){
-    this.clienteSelezionato = val.target.value;
-    this.codiceCommessaSelezionato = codice;
-  }
-
-  changeDataFine(val: any, codiceFiscale: any){
-    this.dataSelezionata = val.target.value;
-    this.codiceFiscaleSelezionato = codiceFiscale;
-
   }
 
 }
