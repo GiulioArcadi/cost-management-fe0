@@ -29,9 +29,9 @@
             </div>
             <br>
             <div class="button1">
-                <button id="b1" type="submit" class="btn btn-outline-light text-primary"
+                <button id="b1" type="button" class="btn btn-outline-light text-primary"
                     (click)="mostraCommesseAttuali()" [routerLink]="['/gestioneCommessa/commessaRicerca'+'/'+nominativo1]">Attuali</button>
-                <button id="b1" type="submit" class="btn btn-outline-light text-primary"
+                <button id="b1" type="button" class="btn btn-outline-light text-primary"
                     (click)="mostraCommesseStorico()" [routerLink]="['/gestioneCommessa/commessaRicerca'+'/'+nominativo1]">Storico</button>
             </div>
         </form>
@@ -55,8 +55,8 @@
                 <tr>
                     <td>{{com.descrizioneCommessa}}</td>
                     <td>{{com.tipologiaCommessa}}</td>
-                    <td>{{com.dataInizioCommessa}}</td>
-                    <td><ng-container *ngIf="com.dataFineCommessa!=null">{{com.dataFineCommessa}}</ng-container></td>
+                    <td>{{com.dataInizioCommessa | date:'dd-MM-yyyy'}}</td>
+                    <td><ng-container *ngIf="com.dataFineCommessa!=null">{{com.dataFineCommessa | date:'dd-MM-yyyy'}}</ng-container></td>
                 </tr>
             </ng-container>
         </tbody>
@@ -78,8 +78,8 @@
                 <tr>
                     <td>{{com.descrizioneCommessa}}</td>
                     <td>{{com.tipologiaCommessa}}</td>
-                    <td>{{com.dataInizioCommessa}}</td>
-                    <td><ng-container *ngIf="com.dataFineCommessa!=null">{{com.dataFineCommessa}}</ng-container></td>
+                    <td>{{com.dataInizioCommessa | date:'dd-MM-yyyy'}}</td>
+                    <td><ng-container *ngIf="com.dataFineCommessa!=null">{{com.dataFineCommessa | date:'dd-MM-yyyy'}}</ng-container></td>
                 </tr>
             </ng-container>
         </tbody>
