@@ -1,0 +1,64 @@
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2 class="text-center">Dettaglio Dipendenti</h2>
+    </div>
+    <br>
+    <div class="panel-body">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr class="table-primary">
+                    <th>Azienda</th>
+                    <th>Nominativo</th>
+                    <th>Cliente</th>
+                    <th>Commessa</th>
+                    <th>Tariffa gg</th>
+                    <th>Costo Lordo gg</th>
+                    <th>Margine</th>
+                    <th>Markup</th>
+                    <th>Data Inizio Attività</th>
+                    <th>Data Fine Attività</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let dipendente of dipendentiStorico; let i = index">
+                    <td>{{dipendente.azienda.nome}}</td>
+                    <td>{{dipendente.nome}} {{dipendente.cognome}} </td>
+
+                    <td><select class="custom-select my-1 mr-sm-2 form-control form-control-sm" (change)="changeCliente($event, dipendente.commessa.codice)">
+                        <option selected disabled>{{dipendente.commessa.cliente.ragioneSociale}}</option>
+                        <option *ngFor="let cliente of clienti | async" [value]="cliente.partitaIva">{{cliente.ragioneSociale}}</option>
+                    </select>
+                    </td>
+
+                    <td>{{dipendente.commessa.codice}}</td>
+
+                    <td><ng-container *ngIf="tipologia==true">{{dipendente.dipendenteCommesse[0].tariffaGg}}</ng-container></td>
+
+                    <!-- <td>{{dipendente.contratti[0].costoGg}}</td> -->
+
+                    <td><input #costo class="form-control form-control-sm" type="number" placeholder="Costo Lordo gg*" required></td>
+
+                    <td>\</td>
+                    <td>\</td>
+
+                    <td><ng-container *ngIf="dipendente.dipendenteCommesse[0].dataInizioAttivita!=null">
+                        {{dipendente.dipendenteCommesse[0].dataInizioAttivita | date:'dd-MM-yyyy'}}</ng-container>
+                    </td>
+
+                    <td><ng-container *ngIf="dipendente.dipendenteCommesse[0].dataFineAttivita!=null">
+                        {{dipendente.dipendenteCommesse[0].dataFineAttivita | date:'dd-MM-yyyy'}}</ng-container>
+                        <ng-container *ngIf="dipendente.dipendenteCommesse[0].dataFineAttivita==null">
+                            <input class="form-control form-control-sm" type="date" (change)="changeDataFine($event, dipendente.codiceFiscale)">
+                        </ng-container>
+                    </td>
+                   
+                </tr>
+            </tbody>
+        </table>
+
+<div class="storico">
+    <a  href="gestioneDipendenti/dettaglio_dipendenti_conformule">Attuali</a>
+    </div>
