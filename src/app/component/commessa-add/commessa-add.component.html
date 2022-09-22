@@ -66,12 +66,11 @@
             <br>
             <div class="form-group" class="form-horizontal">
                 <label for="dataFineCommessa">Data Fine Commessa</label>
-                <input type="date" class="form-control" id="dataFineCommessa" required [(ngModel)]="commessa.dataFineCommessa"
+                <input type="date" class="form-control" id="dataFineCommessa" [(ngModel)]="commessa.dataFineCommessa"
                     name="dataFineCommessa" placeholder="gg/mm/aaaa" 
                      #dataFineCommessa="ngModel"
                     [class.is-invalid]="dataFineCommessa.invalid && dataFineCommessa.touched"> 
                 <div *ngIf="dataFineCommessa.errors && (dataFineCommessa.invalid && dataFineCommessa.touched)" style='float:right;'>
-                    <small class="text-danger" *ngIf="dataFineCommessa.errors.required">Campo Obbligatorio</small>
                     <small class="text-danger" *ngIf="dataFineCommessa.errors.pattern">il formato data deve essere gg/mm/aaaa
                      </small>
                      <small class="text-danger" *ngIf="dataFineCommessa.errors.futureDate">La data di nascita non puo' essere nel futuro
