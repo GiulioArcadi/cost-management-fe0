@@ -60,13 +60,13 @@ export class CommessaAddComponent implements OnInit {
     this.commessa.tipologiaCommessa = this.selectedCommessa;
     
     this.commessaService.
-      addCommessa(this.commessa, this.clienteSelectedPartitaIva).toPromise()
+      addCommessa(this.commessa).toPromise()
       .then(x => this.goToList(), error => console.log(error));
   }
 
-  //TODO
   goToList(){
-    //this.router.navigate(['listaCommesse']);
+    alert("Commessa inserita");
+    this.router.navigate(['gestioneCommessa/commessaList']);
   }
 
 }
