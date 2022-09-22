@@ -50,19 +50,15 @@ export class CommessaRicercaComponent implements OnInit {
 
   changeCliente(id: string){
     this.clienteSelezionato = id;
-    console.log(this.clienteSelezionato);
     this.clienteService.findClienteByPartitaIva(this.clienteSelezionato).toPromise().then(data => {
       this.cliente = data;
-      console.log(this.cliente);
     },error => console.log(error));
   }
 
   onSubmit() {
-    console.log("Sumbit");
   }
 
   mostraCommesseAttuali(){
-    console.log("Attuali");
     this.commessaAttuali=true;
     this.commessaStorico=false;
     /* recupera le commesse tramite il cliente selezionato e il nominativo inserito */
@@ -78,10 +74,9 @@ export class CommessaRicercaComponent implements OnInit {
       },error => console.log(error));
       /* recupera le commesse tramite il cliente selezionato */
     } else {
-      if (this.cliente != null) {
+      if (this.cliente != null && this.nominativo==null) {
         this.commessaService.findCommesseByCliente(this.cliente).subscribe(data => {
           this.commesseRecuperate = data;
-          console.log(this.commesseRecuperate);
           /* recupera le commesse con data fine attività null o successive alla data corrente*/
           for (let i = 0; i < this.commesseRecuperate.length; i++) {
             this.commessaService.findCommesseAttuali(this.commesseRecuperate[i]).subscribe(data => {
@@ -94,14 +89,12 @@ export class CommessaRicercaComponent implements OnInit {
   }
 
   mostraCommesseStorico(){
-    console.log("Storico");
     this.commessaStorico=true;
     this.commessaAttuali=false;
     /* recupera le commesse tramite il cliente selezionato e il nominativo inserito */
     if (this.nominativo!=null && this.cliente!=null) {
       this.commessaService.findCommesseByClienteNominativo(this.cliente, this.nominativo1).subscribe(data => {
         this.commesseRecuperate = data;
-        console.log(this.commesseRecuperate);
         /* recupera le commesse con data fine attività precedenti alla data corrente*/
         for (let i = 0; i < this.commesseRecuperate.length; i++) {
           this.commessaService.findCommesseStorico(this.commesseRecuperate[i]).subscribe(data => {
@@ -114,7 +107,6 @@ export class CommessaRicercaComponent implements OnInit {
       if (this.cliente!=null){
         this.commessaService.findCommesseByCliente(this.cliente).subscribe(data => {
           this.commesseRecuperate = data;
-          console.log(this.commesseRecuperate);
           /* recupera le commesse con data fine attività precedenti alla data corrente*/
           for (let i = 0; i < this.commesseRecuperate.length; i++) {
             this.commessaService.findCommesseStorico(this.commesseRecuperate[i]).subscribe(data => {
@@ -128,7 +120,6 @@ export class CommessaRicercaComponent implements OnInit {
 
   onKeyUp(){
     this.nominativo = this.input.nativeElement.value;
-    console.log(this.nominativo);
     this.nominativo1 = this.nominativo;
   }
 
