@@ -33,14 +33,18 @@ export class DettaglioDipendentiConformuleComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /* recupera tutti i dipendenti */
   async loadDipendenti() {
     await new Promise(f => setTimeout(f, 50));
     this.dipendenti = this.dipendenteService.findAllDipendentiBean();
     this.dipendenti.subscribe(data =>{
       this.dipendente = data;
+      /* scorre i dipendenti, vengono inseriti in un metodo che restituisce una lista di dipendenti con data
+      fine attività successiva a quella odierna */
       for (let i = 0; i < this.dipendente.length; i++) {
         this.dipendenteService.findDipendentiAttuali(this.dipendente[i]).subscribe(data=> {
           this.dipendentiRecuperati = data;
+          /* inserisce i dipendenti recuperati in un array */
           for (let i = 0; i < this.dipendentiRecuperati.length; i++) {
             this.dipendentiAttuali.push(this.dipendentiRecuperati[i]);
           }
@@ -49,16 +53,19 @@ export class DettaglioDipendentiConformuleComponent implements OnInit {
     })
   }
 
+  /* recupera tutti i clienti */
   async loadClienti() {
     await new Promise(f => setTimeout(f, 50));
     this.clienti = this.clienteService.findAllClienti();
   }
 
+  /* recupera il cliente selezionato e il codice della commessa */
   changeCliente(val: any, codice: any){
     this.clienteSelezionato = val.target.value;
     this.codiceCommessaSelezionato = codice;
   }
 
+  /* recupera la data selezionata e il codice fiscale del dipendente */
   changeDataFine(val: any, codiceFiscale: any){
     this.dataSelezionata = val.target.value;
     this.codiceFiscaleSelezionato = codiceFiscale;
@@ -66,6 +73,7 @@ export class DettaglioDipendentiConformuleComponent implements OnInit {
   }
 
   Save() {
+    /* aggiorna il cliente associato alla commessa con il cliente selezionato*/
     if (this.clienteSelezionato!= null){
       this.clienteService.findClienteByPartitaIva(this.clienteSelezionato).subscribe(data =>{
         this.clienteRecuperato = data;
@@ -79,6 +87,7 @@ export class DettaglioDipendentiConformuleComponent implements OnInit {
       },error => console.log(error));
     }
 
+    /* aggiorna la data fine attività del dipendente con quella selezionata */
     if (this.dataSelezionata!=null){
       this.dipendenteService.updateDipendenteData(this.dataSelezionata, this.codiceFiscaleSelezionato).subscribe(data =>{
         if (data!=null){
